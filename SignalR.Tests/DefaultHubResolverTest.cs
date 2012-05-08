@@ -1,4 +1,5 @@
 ﻿using SignalR.Hubs;
+using SignalR.JsonNet;
 using Xunit;
 
 namespace SignalR.Tests
@@ -8,7 +9,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldResolveHubByTypeName()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var hubResolver = new ReflectedHubDescriptorProvider(resolver);
             HubDescriptor hub;
             hubResolver.TryGetHub("HubWithoutAttribute", out hub);
@@ -20,7 +21,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldResolveHubByHubNameAttribute()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var hubResolver = new ReflectedHubDescriptorProvider(resolver);
             HubDescriptor hub;
             hubResolver.TryGetHub("NameFromAttribute", out hub);
@@ -32,7 +33,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldNotResolveHubByFullTypeName()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var hubResolver = new ReflectedHubDescriptorProvider(resolver);
             HubDescriptor hub;
             hubResolver.TryGetHub("SignalR.Tests.HubWithoutAttribute", out hub);
@@ -43,7 +44,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldNotResolveHubByTypeNameIfAttributeExists()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var hubResolver = new ReflectedHubDescriptorProvider(resolver);
             HubDescriptor hub;
             hubResolver.TryGetHub("HubWithAttribute", out hub);
@@ -54,7 +55,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldIgnoreCaseWhenDiscoveringHubs()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var hubResolver = new ReflectedHubDescriptorProvider(resolver);
             HubDescriptor hub;
             hubResolver.TryGetHub("hubwithoutattribute", out hub);
@@ -66,7 +67,7 @@ namespace SignalR.Tests
         [Fact]
         public void ShouldIgnoreCaseWhenDiscoveringHubsUsingManager()
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var manager = new DefaultHubManager(resolver);
             var hub = manager.GetHub("hubwithoutattribute");
 

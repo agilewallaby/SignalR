@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace SignalR
+namespace SignalR.JsonNet
 {
     /// <summary>
     /// Default <see cref="IJsonSerializer"/> implementation over Json.NET.

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 
 namespace SignalR
 {
     /// <summary>
     /// Used to serialize and deserialze outgoing/incoming data.
     /// </summary>
+    [InheritedExport]
     public interface IJsonSerializer
     {
         /// <summary>

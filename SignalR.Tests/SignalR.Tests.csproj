@@ -81,6 +81,10 @@
       <Project>{055F2118-FE29-4219-A28A-3D6F0889652E}</Project>
       <Name>SignalR.Hosting.Memory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SignalR.JsonNet\SignalR.JsonNet.csproj">
+      <Project>{383215E8-F8BF-42BA-9E56-E4C4F0C9856C}</Project>
+      <Name>SignalR.JsonNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SignalR\SignalR.csproj">
       <Project>{1B9A82C4-BCA1-4834-A33E-226F17BE070B}</Project>
       <Name>SignalR</Name>

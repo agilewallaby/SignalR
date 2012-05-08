@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
 namespace SignalR
 {
+    [InheritedExport]
     public interface IDependencyResolver
     {
         object GetService(Type serviceType);

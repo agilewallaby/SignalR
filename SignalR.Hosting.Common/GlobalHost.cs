@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 
 namespace SignalR
 {
@@ -7,7 +8,16 @@ namespace SignalR
     /// </summary>
     public static class GlobalHost
     {
-        private static readonly Lazy<IDependencyResolver> _defaultResolver = new Lazy<IDependencyResolver>(() => new DefaultDependencyResolver());
+        private static readonly Lazy<IDependencyResolver> _defaultResolver = new Lazy<IDependencyResolver>(BuildDependencyResolver);
+
+        private static IDependencyResolver BuildDependencyResolver()
+        {
+            var catalog = new DirectoryCatalog(".");
+            var container = new CompositionContainer(catalog);
+            var resolver = container.GetExportedValue<IDependencyResolver>();
+            return resolver;
+        }
+
         private static IDependencyResolver _resolver;
 
         /// <summary>

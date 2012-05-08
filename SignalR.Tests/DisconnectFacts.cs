@@ -8,6 +8,7 @@ using SignalR.Client.Http;
 using SignalR.Hosting.Memory;
 using SignalR.Hubs;
 using SignalR.Infrastructure;
+using SignalR.JsonNet;
 using Xunit;
 
 namespace SignalR.Tests
@@ -114,7 +115,7 @@ namespace SignalR.Tests
             public ServerNode(IMessageBus bus)
             {
                 // Give each server it's own dependency resolver
-                Server = new MemoryHost(new DefaultDependencyResolver());
+                Server = new MemoryHost(new DefaultDependencyResolver(new JsonConvertAdapter()));
                 Connection = new FarmConnection();
 
                 Server.DependencyResolver.Register(typeof(FarmConnection), () => Connection);

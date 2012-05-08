@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using SignalR.Hubs;
 using SignalR.Infrastructure;
@@ -10,8 +11,9 @@ namespace SignalR
     public class DefaultDependencyResolver : IDependencyResolver
     {
         private readonly Dictionary<Type, IList<Func<object>>> _resolvers = new Dictionary<Type, IList<Func<object>>>();
-
-        public DefaultDependencyResolver()
+        
+        [ImportingConstructor]
+        public DefaultDependencyResolver(IJsonSerializer serializer)
         {
             var traceManager = new Lazy<TraceManager>(() => new TraceManager());
 
@@ -29,8 +31,6 @@ namespace SignalR
             var messageBus = new Lazy<InProcessMessageBus>(() => new InProcessMessageBus(this));
 
             Register(typeof(IMessageBus), () => messageBus.Value);
-
-            var serializer = new JsonConvertAdapter();
 
             Register(typeof(IJsonSerializer), () => serializer);
 

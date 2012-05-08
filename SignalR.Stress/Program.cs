@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SignalR.Infrastructure;
+using SignalR.JsonNet;
 
 namespace SignalR.Stress
 {
@@ -50,7 +50,7 @@ namespace SignalR.Stress
 
         static void Main(string[] args)
         {
-            var resolver = new DefaultDependencyResolver();
+            var resolver = new DefaultDependencyResolver(new JsonConvertAdapter());
             var bus = new InProcessMessageBus(resolver);
             var eventKeys = new[] { "a", "b", "c" };
             string payload = GetPayload();
